@@ -59,6 +59,13 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Delay Before Deployment
+        env:
+          DEPLOY_WAIT_TIME: 10000 # milliseconds (adjust as needed)
+        run: |
+          echo "Waiting for $((DEPLOY_WAIT_TIME / 1000)) seconds..."
+          sleep $((DEPLOY_WAIT_TIME / 1000))
+
       - name: Deploy to GitHub Pages
         needs: [Push Changes] # Make sure the deployment runs after the push changes step
         uses: JamesIves/github-pages-deploy-action@4.1.4
