@@ -6,6 +6,7 @@ on:
       generate_test_result:
         description: 'Generate random test result'
         required: true
+        default: 'Passed'
         options:
           - 'Passed'
           - 'Failed'
