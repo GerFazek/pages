@@ -63,9 +63,27 @@
       });
 
       $('#environment-filter').on('change', function() {
+      const selectedEnvironment = $(this).val();
+
+      // Show/hide rows based on the selected environment
+      if (selectedEnvironment === 'all') {
+        $('table tbody tr').show();
+      } else {
+        $('table tbody tr').each(function() {
+          const rowEnvironment = $(this).find('td:nth-child(2)').text().toLowerCase();
+          if (rowEnvironment === selectedEnvironment) {
+            $(this).show();
+          } else {
+            $(this).hide();
+          }
+        });
+      }
+      });
+
+      // Event delegation for filtering rows based on the selected environment
+  $('#testRunContent').on('change', '#environment-filter', function() {
     const selectedEnvironment = $(this).val();
 
-    // Show/hide rows based on the selected environment
     if (selectedEnvironment === 'all') {
       $('table tbody tr').show();
     } else {
