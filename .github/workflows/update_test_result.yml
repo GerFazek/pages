@@ -24,8 +24,13 @@ jobs:
           fi
           echo "Class Attribute: $CLASS_ATTRIBUTE"
 
-          # Create the new table row
-          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td $CLASS_ATTRIBUTE>$RESULT</td><td><a href=\"https://github.com/GerFazek/pages/actions/runs/5692887173\">Link to GitHub Actions</a></td></tr>"
+          # Generate the workflow run link based on the GITHUB_RUN_ID
+          WORKFLOW_RUN_ID=$(echo "$GITHUB_RUN_ID" | cut -c 1-7) # Taking the first 7 characters for brevity
+          GITHUB_ACTIONS_LINK="https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          echo "Workflow Run Link: $GITHUB_ACTIONS_LINK"
+
+          # Create the new table row with the dynamic href
+          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td $CLASS_ATTRIBUTE>$RESULT</td><td><a href=\"$GITHUB_ACTIONS_LINK\">Link to GitHub Actions</a></td></tr>\n"
           echo "New Table Row: $NEW_RESULT"
 
           # Replace the table body content in the HTML file with the new table row
