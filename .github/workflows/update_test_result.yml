@@ -39,4 +39,4 @@ jobs:
           git commit -m "Update test result"
           git push --set-upstream origin ${{ github.ref }}
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.UPDATE_HTML_CONTENT }}
