@@ -23,7 +23,7 @@ jobs:
       # Update the HTML file with the new test result
       - name: Update HTML File
         run: |
-          RESULT="${{ steps.generate_result.outputs.result }}"
+          RESULT="${{ github.event.inputs.generate_test_result }}"
           NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td class=\"$RESULT\">$RESULT</td><td><a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">Link to GitHub Actions</a></td></tr>"
           sed -i "s|<table><tbody>|<table><tbody>$NEW_RESULT|" html_content/boards_api_test_all.html
           git config user.name "GitHub Actions"
