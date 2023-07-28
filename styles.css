@@ -104,3 +104,52 @@ table td.failed {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+/* Styling for the filtering dropdown */
+.filter-container {
+  position: relative;
+  display: inline-block;
+}
+
+.filter-container select {
+  appearance: none;
+  background-color: #2e8093; /* Darker Turquoise */
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.filter-container select::-ms-expand {
+  display: none;
+}
+
+.filter-container::after {
+  content: '\f0d7'; /* Unicode character for down arrow (Font Awesome) */
+  font-family: 'Font Awesome 5 Free';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+  pointer-events: none;
+}
+
+/* Hover styles for the filtering dropdown */
+.filter-container:hover select {
+  background-color: #176d82; /* Lighter Turquoise on hover */
+}
+
+/* Focus styles for the filtering dropdown */
+.filter-container select:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Styling for dropdown options */
+.filter-container select option {
+  background-color: #2e8093; /* Darker Turquoise */
+  color: #fff;
+}
