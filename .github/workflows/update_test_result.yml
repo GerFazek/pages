@@ -2,10 +2,6 @@ name: Generate Test Result and Update HTML
 
 on:
   workflow_dispatch:
-    inputs:
-      generate_test_result:
-        description: 'Generate random test result'
-        required: true
 
 jobs:
   generate_test_result:
@@ -33,7 +29,7 @@ jobs:
           echo "New Table Row: $NEW_RESULT"
 
           # Replace the table body content in the HTML file with the new table row
-          sed -i "s|<table><tbody>|<table><tbody>$NEW_RESULT|" html_content/boards_api_test_all.html
+          sed -i "s|<tbody>|<tbody>$NEW_RESULT|" html_content/boards_api_test_all.html
 
           # Display the updated HTML content for verification (optional)
           cat html_content/boards_api_test_all.html
