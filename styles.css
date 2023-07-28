@@ -69,4 +69,38 @@ table {
   border-collapse: collapse;
 }
 
-table
+table th, table td {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+table th {
+  background-color: #44a7bc; /* Turquoise */
+  color: #fff;
+}
+
+/* Test result colors */
+table td:nth-child(3) {
+  font-weight: bold;
+}
+
+table td.passed {
+  color: #2ecc71; /* Green */
+}
+
+table td.failed {
+  color: #e74c3c; /* Red */
+}
+
+/* Round shapes and visually appealing styles */
+.container {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+/* Additional spacing for filtering option */
+#environment-filter {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
