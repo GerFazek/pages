@@ -20,15 +20,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      # Add your other build or setup steps here, if any...
-
-      # Generate the random test result based on user input (manual trigger)
-      - name: Generate Test Result
-        id: generate_result
-        run: |
-          RESULT="${{ github.event.inputs.generate_test_result }}"
-          echo "::set-output name=result::$RESULT"
-
       # Update the HTML file with the new test result
       - name: Update HTML File
         run: |
