@@ -10,6 +10,8 @@ body, html {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
+  max-width: 1200px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container horizontally */
 }
 
 nav {
@@ -19,6 +21,7 @@ nav {
   flex: 1;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  min-width: 200px; /* Set a minimum width for the navigation bar */
 }
 
 nav ul {
@@ -49,6 +52,7 @@ nav a:hover {
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
   background-color: #f1f1f1; /* Light Gray */
+  overflow-x: auto; /* Add horizontal scrollbar if content overflows */
 }
 
 /* Title styles */
@@ -76,7 +80,7 @@ table th {
 }
 
 /* Test result colors */
-table td:nth-child(2) {
+table td:nth-child(3) {
   font-weight: bold;
 }
 
@@ -93,5 +97,4 @@ table td.failed {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   margin: 20px auto;
-  max-width: 800px;
 }
