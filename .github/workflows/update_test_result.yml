@@ -1,4 +1,4 @@
-name: Update Test Result
+name: Generate Test Result and Update HTML
 
 on:
   workflow_dispatch:
@@ -6,11 +6,6 @@ on:
       generate_test_result:
         description: 'Generate random test result'
         required: true
-        default: 'Passed'
-        type: choice
-        options:
-          - 'Passed'
-          - 'Failed'
 
 jobs:
   generate_test_result:
@@ -25,12 +20,20 @@ jobs:
           RESULT=$(shuf -n 1 -e "Passed" "Failed")
           echo "Generated Test Result: $RESULT"
 
+          # Determine the class attribute based on the test result
+          if [ "$RESULT" = "Passed" ]; then
+            CLASS_ATTRIBUTE="class=\"passed\""
+          else
+            CLASS_ATTRIBUTE="class=\"failed\""
+          fi
+          echo "Class Attribute: $CLASS_ATTRIBUTE"
+
           # Create the new table row
-          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td class=\"$RESULT\">$RESULT</td><td><a href=\"https://github.com/GerFazek/pages/actions/runs/5692887173\">Link to GitHub Actions</a></td></tr>"
+          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td $CLASS_ATTRIBUTE>$RESULT</td><td><a href=\"https://github.com/GerFazek/pages/actions/runs/5692887173\">Link to GitHub Actions</a></td></tr>"
           echo "New Table Row: $NEW_RESULT"
 
           # Replace the table body content in the HTML file with the new table row
-          sed -i "s|<tbody>|<tbody>$NEW_RESULT|" html_content/boards_api_test_all.html
+          sed -i "s|<table><tbody>|<table><tbody>$NEW_RESULT|" html_content/boards_api_test_all.html
 
           # Display the updated HTML content for verification (optional)
           cat html_content/boards_api_test_all.html
