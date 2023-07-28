@@ -30,7 +30,7 @@ jobs:
           echo "Workflow Run Link: $GITHUB_ACTIONS_LINK"
 
           # Create the new table row with the dynamic href
-          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td $CLASS_ATTRIBUTE>$RESULT</td><td><a href=\"$GITHUB_ACTIONS_LINK\">Link to GitHub Actions</a></td></tr>\n"
+          NEW_RESULT="\n<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td $CLASS_ATTRIBUTE>$RESULT</td><td><a href=\"$GITHUB_ACTIONS_LINK\">Link to GitHub Actions</a></td></tr>\n"
           echo "New Table Row: $NEW_RESULT"
 
           # Replace the table body content in the HTML file with the new table row
