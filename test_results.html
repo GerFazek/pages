@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Runs</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <ul>
+        <li><a href="#" data-testrun="boards_api_test_all">Boards API Test All</a></li>
+        <li><a href="#" data-testrun="boards_api_tests_single">Boards API Tests Single</a></li>
+        <li><a href="#" data-testrun="boards_rms_tests">Boards RMS Tests</a></li>
+        <li><a href="#" data-testrun="boards_rms_tests_all">Boards RMS Tests All</a></li>
+        <li><a href="#" data-testrun="boards_rms_tests_minutes">Boards RMS Tests Minutes</a></li>
+        <li><a href="#" data-testrun="bulk_upload_smoke_tests">Bulk Upload Smoke Tests</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <h2 id="testRunTitle">Boards API Test All</h2>
+      <div id="testRunContent">
+        <!-- Content will be loaded dynamically here -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    $(document).ready(function() {
+      // Function to load the content of a specific test run
+      function loadTestRunContent(testRunName) {
+        fetch(`${testRunName}.html`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            console.log('Data loaded successfully:', data);
+            $('#testRunTitle').text($('nav a[data-testrun="' + testRunName + '"]').text());
+            $('#testRunContent').html(data);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            // Handle error if the file doesn't exist
+            $('#testRunTitle').text($('nav a[data-testrun="' + testRunName + '"]').text() + ' (Not available)');
+            $('#testRunContent').html('<p>Content not found for this test run.</p>');
+          });
+      }
+
+      // Load the initial content for the first test run
+      loadTestRunContent('boards_api_test_all');
+
+      // Add event listeners to navigation links to load the content for the selected test run
+      $('nav a').on('click', function(event) {
+        event.preventDefault();
+        const testRunName = $(this).data('testrun');
+        console.log('Clicked test run:', testRunName);
+        loadTestRunContent(testRunName);
+      });
+    });
+  </script>
+</body>
+</html>
