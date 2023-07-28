@@ -13,23 +13,40 @@ on:
           - 'Failed'
 
 jobs:
-  update_test_result:
+  generate_test_result:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v2
 
-      # Update the HTML file with the new test result
-      - name: Update HTML File
+      - name: Set Environment Variables
         run: |
-          RESULT="${{ github.event.inputs.generate_test_result }}"
-          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td class=\"$RESULT\">$RESULT</td><td><a href=\"https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\">Link to GitHub Actions</a></td></tr>"
+          # Generate random test result (Passed or Failed)
+          RESULT=$(shuf -n 1 -e "Passed" "Failed")
+          echo "Generated Test Result: $RESULT"
+
+          # Create the new table row
+          NEW_RESULT="<tr><td>$(date +'%Y-%m-%d %H:%M:%S')</td><td>Regression</td><td class=\"$RESULT\">$RESULT</td><td><a href=\"https://github.com/GerFazek/pages/actions/runs/5692887173\">Link to GitHub Actions</a></td></tr>"
+          echo "New Table Row: $NEW_RESULT"
+
+          # Replace the table body content in the HTML file with the new table row
           sed -i "s|<table><tbody>|<table><tbody>$NEW_RESULT|" html_content/boards_api_test_all.html
+
+          # Display the updated HTML content for verification (optional)
+          cat html_content/boards_api_test_all.html
+
+      - name: Configure Git
+        run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@users.noreply.github.com"
+
+      - name: Commit Changes
+        run: |
           git add html_content/boards_api_test_all.html
-          git commit -m "Update test result"
-          git push --set-upstream origin ${{ github.ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.UPDATE_HTML_CONTENT }}
+          git diff-index --quiet HEAD || git commit -m "Update test result"
+          echo "Changes Committed"
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
