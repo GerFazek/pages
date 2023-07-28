@@ -6,7 +6,7 @@
   <label for="environment-filter">Filter by Environment:</label>
   <select id="environment-filter">
     <option value="all">All Environments</option>
-    <option value="Regression">Development</option>
+    <option value="dev">Development</option>
     <option value="staging">Staging</option>
     <option value="prod">Production</option>
     <!-- Add more environments as needed -->
@@ -15,8 +15,9 @@
     <thead>
       <tr>
         <th>Date</th>
+        <th>Environment</th> <!-- New column -->
         <th>Test Result</th>
-        <th>GitHub Actions</th>
+        <th>Details</th>
       </tr>
     </thead>
     <tbody>
