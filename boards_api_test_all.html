@@ -1,6 +1,17 @@
 <div class="content">
-  <h2>Test Run 1</h2>
-<table>
+  <h3>Test Run 1</h3>
+  <p>
+    Below is the summary of the test results for the "Boards API Test All" test run.
+  </p>
+  <label for="environment-filter">Filter by Environment:</label>
+  <select id="environment-filter">
+    <option value="all">All Environments</option>
+    <option value="Regression">Development</option>
+    <option value="staging">Staging</option>
+    <option value="prod">Production</option>
+    <!-- Add more environments as needed -->
+  </select>
+  <table>
     <thead>
       <tr>
         <th>Date</th>
@@ -12,16 +23,37 @@
       <!-- Data rows will be filled dynamically -->
       <tr>
         <td>2023-07-28 10:00:05</td>
+        <td>Regression</td>
         <td  class="passed">Passed</td>
         <td><a href="#">Link to GitHub Actions</a></td>
       </tr>
       <tr>
         <td>2023-07-28 10:00:02</td>
+        <td>Dev</td>
         <td  class="passed">Passed</td>
         <td><a href="#">Link to GitHub Actions</a></td>
       </tr>
       <tr>
         <td>2023-07-28 10:00:00</td>
+        <td>Dev</td>
+        <td  class="failed">Failed</td>
+        <td><a href="#">Link to GitHub Actions</a></td>
+      </tr>
+      <tr>
+        <td>2023-07-28 09:55:00</td>
+        <td>Dev</td>
+        <td  class="failed">Failed</td>
+        <td><a href="#">Link to GitHub Actions</a></td>
+      </tr>
+      <tr>
+        <td>2023-07-28 09:50:00</td>
+        <td>Dev</td>
+        <td  class="failed">Failed</td>
+        <td><a href="#">Link to GitHub Actions</a></td>
+      </tr>
+      <tr>
+        <td>2023-07-28 09:45:00</td>
+        <td>Regression</td>
         <td  class="failed">Failed</td>
         <td><a href="#">Link to GitHub Actions</a></td>
       </tr>
