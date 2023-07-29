@@ -48,7 +48,7 @@ jobs:
 
       - name: Debug - Show File Differences After sed Command
         run: git diff
-        
+
       - name: Configure Git
         run: |
           git config user.name "GitHub Actions"
@@ -59,11 +59,6 @@ jobs:
           git add html_content/boards_api_test_all.html
           git diff-index --quiet HEAD || git commit -m "Update test result"
           echo "Changes Committed"
-
-      - name: Push Changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Delay Before Deployment
         env:
