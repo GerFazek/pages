@@ -1,10 +1,9 @@
 name: Deploy Test Results
 
 on:
-  workflow_run:
-    workflows: ["Generate Test Result and Update HTML"]
-    types:
-      - completed
+  push:
+    branches:
+      - temp_branch
 
 jobs:
   deploy:
@@ -12,8 +11,6 @@ jobs:
     steps:
       - name: Checkout Main Branch
         uses: actions/checkout@v2
-        with:
-          ref: main
 
       # Display the current directory to verify if the html_content folder exists
       - name: Show Working Directory Contents
@@ -27,12 +24,13 @@ jobs:
       - name: Show Updated HTML File
         run: cat html_content/boards_api_test_all.html
 
+      # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: main
-          folder: .
-          
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html_content
+
       # Show a success message after the deployment
       - name: Deployment Successful
-        run: echo "Deployment status success"
+        run: echo "Deployment status: success"

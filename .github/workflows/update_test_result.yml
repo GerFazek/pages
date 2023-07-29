@@ -48,14 +48,19 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@users.noreply.github.com"
 
+      # Commit changes to a temporary branch
       - name: Commit Changes
         run: |
           git add html_content/boards_api_test_all.html
           git diff-index --quiet HEAD || git commit -m "Update test result"
           echo "Changes Committed"
 
+          # Create a temporary branch to push the changes
+          git checkout -b temp_branch
+
+      # Push changes to the temporary branch
       - name: Push Changes
-        run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@users.noreply.github.com"
-          git push origin main
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: temp_branch
