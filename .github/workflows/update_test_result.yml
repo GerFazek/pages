@@ -55,12 +55,9 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update test result"
           echo "Changes Committed"
 
-          # Create a temporary branch to push the changes
-          git checkout -b temp_branch
-
-      # Push changes to the temporary branch
+      # Push changes to main branch
       - name: Push Changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: temp_branch
+          branch: main
