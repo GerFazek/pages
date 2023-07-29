@@ -33,4 +33,4 @@ jobs:
 
       # Show a success message after the deployment
       - name: Deployment Successful
-        run: echo "Deployment status: success"
+        run: echo "Deployment status success"
