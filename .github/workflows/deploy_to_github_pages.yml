@@ -13,9 +13,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      # Display the current directory to verify if the html_content folder exists
+      - name: Show Working Directory Contents
+        run: ls -la
+
+      # Display the content of the html_content folder
+      - name: Show html_content Folder Contents
+        run: ls -la html_content
+
+      # Display the content of the updated HTML file
+      - name: Show Updated HTML File
+        run: cat html_content/boards_api_test_all.html
+
       # Deploy only the html_content folder to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./html_content
+
+      # Show a success message after the deployment
+      - name: Deployment Successful
+        run: echo "Deployment status success"
