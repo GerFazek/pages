@@ -66,8 +66,7 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git push origin main
 
-      - name: Deploy to GitHub Pages
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: main
+      # Add a new step to set an output if the push was successful
+      - name: Set Output if Changes Were Pushed
+        id: push_status
+        run: echo "test_result_updated=true" >> $GITHUB_ENV
