@@ -66,8 +66,8 @@ jobs:
 
       - name: Set Deployment Status
         if: steps.trigger_deploy.outputs.result == 'Deployment triggered'
-        run: echo "Deployment status: success"
+        run: echo "Deployment status success"
 
       - name: Set Deployment Status Failed
         if: steps.trigger_deploy.outputs.result != 'Deployment triggered'
-        run: echo "Deployment status: failed"
+        run: echo "Deployment status failed"
