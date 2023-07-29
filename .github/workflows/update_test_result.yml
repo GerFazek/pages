@@ -60,9 +60,15 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "Update test result"
           echo "Changes Committed"
 
+      - name: Push Changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@users.noreply.github.com"
+          git push origin main
+
       - name: Delay Before Deployment
         env:
-          DEPLOY_WAIT_TIME: 20000 # milliseconds (adjust as needed)
+          DEPLOY_WAIT_TIME: 5000 # milliseconds (adjust as needed)
         run: |
           echo "Waiting for $((DEPLOY_WAIT_TIME / 1000)) seconds..."
           sleep $((DEPLOY_WAIT_TIME / 1000))
