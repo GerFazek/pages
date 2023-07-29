@@ -43,12 +43,6 @@ jobs:
           # Display the updated HTML content for verification (optional)
           cat html_content/boards_api_test_all.html
 
-      - name: Debug - Show Working Directory Contents After sed Command
-        run: ls -la html_content/
-
-      - name: Debug - Show File Differences After sed Command
-        run: git diff
-
       - name: Configure Git
         run: |
           git config user.name "GitHub Actions"
@@ -66,7 +60,14 @@ jobs:
           git config user.email "actions@users.noreply.github.com"
           git push origin main
 
-      # Add a new step to set an output if the push was successful
-      - name: Set Output if Changes Were Pushed
-        id: push_status
-        run: echo "test_result_updated=true" >> $GITHUB_ENV
+      - name: Set Deployment Trigger
+        id: trigger_deploy
+        run: echo "Deployment triggered"
+
+      - name: Set Deployment Status
+        if: steps.trigger_deploy.outputs.result == 'Deployment triggered'
+        run: echo "Deployment status: success"
+
+      - name: Set Deployment Status Failed
+        if: steps.trigger_deploy.outputs.result != 'Deployment triggered'
+        run: echo "Deployment status: failed"

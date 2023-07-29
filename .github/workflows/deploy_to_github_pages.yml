@@ -1,11 +1,9 @@
-name: Deploy to GitHub Pages
+name: Deploy Test Results
 
 on:
-  # Trigger the deployment workflow when the 'workflow_run' event occurs
-  workflow_run:
-    workflows: ["Generate Test Result and Update HTML"] # Name of the test result update workflow
-    types:
-      - completed
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
@@ -13,11 +11,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-
-      # Add a condition to check the output variable from the previous workflow
-      - name: Deploy if Test Result Updated
-        if: success() && env.test_result_updated == 'true'
+        with:
+          ref: main
+          path: html_content
+          
+      - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           branch: main
-          folder: .
+          folder: html_content # Deploy only the html_content folder
