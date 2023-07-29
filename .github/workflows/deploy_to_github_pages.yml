@@ -10,8 +10,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Main Branch
         uses: actions/checkout@v2
+        with:
+          ref: main
 
       # Display the current directory to verify if the html_content folder exists
       - name: Show Working Directory Contents
@@ -34,4 +36,4 @@ jobs:
 
       # Show a success message after the deployment
       - name: Deployment Successful
-        run: echo "Deployment status success"
+        run: echo "Deployment status: success"
