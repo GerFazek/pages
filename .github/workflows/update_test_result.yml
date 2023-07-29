@@ -59,15 +59,3 @@ jobs:
           git config user.name "GitHub Actions"
           git config user.email "actions@users.noreply.github.com"
           git push origin main
-
-      - name: Set Deployment Trigger
-        id: trigger_deploy
-        run: echo "Deployment triggered"
-
-      - name: Set Deployment Status
-        if: steps.trigger_deploy.outputs.result == 'Deployment triggered'
-        run: echo "Deployment status success"
-
-      - name: Set Deployment Status Failed
-        if: steps.trigger_deploy.outputs.result != 'Deployment triggered'
-        run: echo "Deployment status failed"

@@ -1,9 +1,10 @@
 name: Deploy Test Results
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Generate Test Result and Update HTML"]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -11,9 +12,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-          
+
+      # Deploy only the html_content folder to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: main
-          folder: html_content # Deploy only the html_content folder
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./html_content
