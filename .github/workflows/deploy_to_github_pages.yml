@@ -27,13 +27,12 @@ jobs:
       - name: Show Updated HTML File
         run: cat html_content/boards_api_test_all.html
 
-      # Deploy only the html_content folder to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./html_content
-
+          branch: main
+          folder: .
+          
       # Show a success message after the deployment
       - name: Deployment Successful
         run: echo "Deployment status success"
