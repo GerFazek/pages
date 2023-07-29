@@ -43,6 +43,12 @@ jobs:
           # Display the updated HTML content for verification (optional)
           cat html_content/boards_api_test_all.html
 
+      - name: Debug - Show Working Directory Contents After sed Command
+        run: ls -la html_content/
+
+      - name: Debug - Show File Differences After sed Command
+        run: git diff
+        
       - name: Configure Git
         run: |
           git config user.name "GitHub Actions"
@@ -65,6 +71,9 @@ jobs:
         run: |
           echo "Waiting for $((DEPLOY_WAIT_TIME / 1000)) seconds..."
           sleep $((DEPLOY_WAIT_TIME / 1000))
+
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
