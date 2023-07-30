@@ -59,7 +59,8 @@
   $(document).ready(function() {
     // Function to load the content of a specific test run
     function loadTestRunContent(testRunName) {
-      fetch(`${testRunName}.html`)
+      const cacheBuster = Math.random().toString(36).substring(7);
+      fetch(`${testRunName}.html?v=${cacheBuster}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Network response was not ok');
