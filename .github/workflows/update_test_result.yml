@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
   # Add the cron job trigger to run every 30 minutes
-  schedule:
-    - cron: "*/30 * * * *"
+  #schedule:
+  #  - cron: "*/30 * * * *"
 
 jobs:
   generate_test_result:
